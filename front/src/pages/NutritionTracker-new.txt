@@ -1,0 +1,7 @@
+
+// Add this after tabValue === 1 block and before Snackbar
+        {tabValue === 2 && (
+          <WaterTracker />
+        )}
+
+// Add this code around line 197-198

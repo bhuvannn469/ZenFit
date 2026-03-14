@@ -1,0 +1,52 @@
+.App {
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body, #root, .App {
+  min-height: 100vh;
+  height: 100vh;
+  background: none !important;
+  background-color: #f5f6fa !important;
+}
+
+body[data-theme='dark'], #root[data-theme='dark'], .App[data-theme='dark'] {
+  background-color: #181c24 !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.MuiPaper-root {
+  border-radius: 10px !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.MuiButton-containedPrimary {
+  background-color: #4158d0 !important;
+  transition: all 0.3s ease !important;
+}
+
+.MuiButton-containedPrimary:hover {
+  background-color: #3449af !important;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(65, 88, 208, 0.3) !important;
+}
+
+.MuiDivider-root {
+  margin: 16px 0 !important;
+}
+
+a {
+  color: #4158d0;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

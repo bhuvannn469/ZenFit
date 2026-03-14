@@ -1,0 +1,305 @@
+import React, { useState } from 'react';
+import { 
+  Box, 
+  Button, 
+  TextField, 
+  Typography, 
+  Container, 
+  Link, 
+  Paper,
+  Alert,
+  CircularProgress
+} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { authService, RegisterData } from '../services/authService';
+
+interface RegisterFormData {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+const Register: React.FC = () => {
+  const [formData, setFormData] = useState<RegisterFormData>({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
+  const [error, setError] = useState<string>('');
+  const [successMessage, setSuccessMessage] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+  
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validate form
+    if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
+      setError('All fields are required');
+      return;
+    }
+    
+    // Validate passwords match
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+    
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError('Please enter a valid email address');
+      return;
+    }
+    
+    setIsLoading(true);
+    setError('');
+    
+    try {
+      const registerData: RegisterData = {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password
+      };
+      
+      console.log('Registering with data:', registerData);
+      await authService.register(registerData);
+      
+      // Show success message and redirect to login page after 2 seconds
+      setSuccessMessage('Account created successfully! Redirecting to login...');
+      setTimeout(() => {
+        navigate('/');
+      }, 2000);
+    } catch (error: any) {
+      console.error('Registration error:', error);
+      
+      // Display a more detailed error message
+      if (error.response) {
+        setError(error.response.data?.msg || 'Registration failed. Please try again.');
+      } else if (error.message) {
+        setError(error.message);
+      } else {
+        setError('Failed to register. Please check your connection and try again.');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <Container component="main" maxWidth="xs">
+      <Paper elevation={3} sx={{ padding: 4, marginTop: 8 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography component="h1" variant="h5">
+            Create an Account
+          </Typography>
+          
+          {error && (
+            <Alert severity="error" sx={{ mt: 2, width: '100%' }}>
+              {error}
+            </Alert>
+          )}
+          
+          {successMessage && (
+            <Alert severity="success" sx={{ mt: 2, width: '100%' }}>
+              {successMessage}
+            </Alert>
+          )}
+          
+          <Box component="form" onSubmit={handleRegister} sx={{ mt: 1, width: '100%' }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="Full Name"
+              name="name"
+              autoComplete="name"
+              autoFocus
+              value={formData.name}
+              onChange={handleChange}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="new-password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="confirmPassword"
+              label="Confirm Password"
+              type="password"
+              id="confirmPassword"
+              autoComplete="new-password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  <CircularProgress size={24} sx={{ mr: 1 }} color="inherit" />
+                  Creating Account...
+                </>
+              ) : (
+                'Sign Up'
+              )}
+            </Button>
+            
+            <Link href="/" variant="body2" style={{ display: 'block', textAlign: 'center' }}>
+              Already have an account? Sign In
+            </Link>
+          </Box>
+        </Box>
+      </Paper>
+    </Container>
+  );
+};
+
+export default Register;
+            setError('Network error. Please check your internet connection. Details: ' + error.message);
+            break;
+            setError('Authentication configuration error. Please contact support.');
+            break;
+          default:
+            setError(error.message ?? 'Failed to register. Error: ' + JSON.stringify(error));
+        }
+      } else if (error.response) {
+        setError(`Server error: ${error.response.data?.msg || error.response.statusText || 'Unknown server error'}`);
+      } else {
+        setError(error.message ?? 'Network error: Unable to connect to the server');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <Container component="main" maxWidth="xs">
+      <Paper elevation={3} sx={{ padding: 4, marginTop: 8 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography component="h1" variant="h5">
+            Create an Account
+          </Typography>
+          
+          {error && (
+            <Typography color="error" sx={{ mt: 2 }}>
+              {error}
+            </Typography>
+          )}          
+          <Box component="form" onSubmit={handleRegister} sx={{ mt: 1, width: '100%' }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="Full Name"
+              name="name"
+              autoComplete="name"
+              autoFocus
+              value={formData.name}
+              onChange={handleChange}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="new-password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="confirmPassword"
+              label="Confirm Password"
+              type="password"
+              id="confirmPassword"
+              autoComplete="new-password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              disabled={isLoading}
+            >
+              {isLoading ? 'Creating Account...' : 'Sign Up'}
+            </Button>
+            
+            <Link href="/" variant="body2" style={{ display: 'block', textAlign: 'center' }}>
+              Already have an account? Sign In
+            </Link>
+          </Box>
+        </Box>
+      </Paper>
+    </Container>
+  );
+};
+
+export default Register;

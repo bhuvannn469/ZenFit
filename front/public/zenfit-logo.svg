@@ -1,0 +1,78 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradient definitions for realistic colors -->
+    <linearGradient id="skinTone" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8d5b7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d4b896;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="muscleDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#b8906f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a67c52;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="redMuscle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c44444;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a93a3a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="darkOutline" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2c3e50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a252f;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Head/Face -->
+  <ellipse cx="24" cy="12" rx="7" ry="8" fill="url(#skinTone)" stroke="url(#darkOutline)" stroke-width="1.5"/>
+  
+  <!-- Neck -->
+  <rect x="21" y="19" width="6" height="4" fill="url(#skinTone)" stroke="url(#darkOutline)" stroke-width="1"/>
+  
+  <!-- Main torso/chest -->
+  <ellipse cx="24" cy="30" rx="12" ry="10" fill="url(#redMuscle)" stroke="url(#darkOutline)" stroke-width="2"/>
+  
+  <!-- Chest definition lines -->
+  <path d="M 16 25 Q 24 28 32 25" stroke="url(#darkOutline)" stroke-width="1.5" fill="none"/>
+  <path d="M 24 22 L 24 35" stroke="url(#darkOutline)" stroke-width="1.5"/>
+  
+  <!-- Left bicep (flexed) -->
+  <ellipse cx="10" cy="26" rx="5" ry="7" fill="url(#redMuscle)" stroke="url(#darkOutline)" stroke-width="2"/>
+  <ellipse cx="9" cy="24" rx="3" ry="4" fill="url(#muscleDark)"/>
+  
+  <!-- Right bicep (flexed) -->
+  <ellipse cx="38" cy="26" rx="5" ry="7" fill="url(#redMuscle)" stroke="url(#darkOutline)" stroke-width="2"/>
+  <ellipse cx="39" cy="24" rx="3" ry="4" fill="url(#muscleDark)"/>
+  
+  <!-- Left forearm -->
+  <ellipse cx="6" cy="20" rx="3" ry="6" fill="url(#skinTone)" stroke="url(#darkOutline)" stroke-width="1.5"/>
+  
+  <!-- Right forearm -->
+  <ellipse cx="42" cy="20" rx="3" ry="6" fill="url(#skinTone)" stroke="url(#darkOutline)" stroke-width="1.5"/>
+  
+  <!-- Left fist -->
+  <circle cx="5" cy="15" r="3" fill="url(#redMuscle)" stroke="url(#darkOutline)" stroke-width="1.5"/>
+  
+  <!-- Right fist -->
+  <circle cx="43" cy="15" r="3" fill="url(#redMuscle)" stroke="url(#darkOutline)" stroke-width="1.5"/>
+  
+  <!-- Abs definition -->
+  <rect x="20" y="27" width="8" height="3" fill="url(#muscleDark)" rx="1"/>
+  <rect x="20" y="31" width="8" height="2.5" fill="url(#muscleDark)" rx="1"/>
+  <rect x="20" y="34.5" width="8" height="2.5" fill="url(#muscleDark)" rx="1"/>
+  
+  <!-- Shoulder definition -->
+  <ellipse cx="16" cy="24" rx="4" ry="3" fill="url(#muscleDark)" stroke="url(#darkOutline)" stroke-width="1"/>
+  <ellipse cx="32" cy="24" rx="4" ry="3" fill="url(#muscleDark)" stroke="url(#darkOutline)" stroke-width="1"/>
+  
+  <!-- Face features -->
+  <!-- Eyes -->
+  <ellipse cx="21" cy="10" rx="1" ry="2" fill="#000"/>
+  <ellipse cx="27" cy="10" rx="1" ry="2" fill="#000"/>
+  
+  <!-- Nose -->
+  <path d="M 24 12 L 23 14 L 25 14 Z" fill="url(#muscleDark)"/>
+  
+  <!-- Mouth/grimace -->
+  <path d="M 21 15 Q 24 17 27 15" stroke="#000" stroke-width="1.5" fill="none"/>
+  
+  <!-- Additional muscle definition lines -->
+  <path d="M 12 28 Q 16 26 20 28" stroke="url(#darkOutline)" stroke-width="1" fill="none"/>
+  <path d="M 28 28 Q 32 26 36 28" stroke="url(#darkOutline)" stroke-width="1" fill="none"/>
+</svg>
