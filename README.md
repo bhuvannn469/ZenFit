@@ -185,6 +185,39 @@ Current frontend API base URL is configured as:
 - Repository currently includes some backup/experimental page variants in front/src/pages.
 - Production cleanup can remove unused backup files once final pages are confirmed.
 
+## Security Practices
+
+### Secret Handling
+
+- Never commit real API keys, tokens, or passwords.
+- Keep real values only in local env files such as front/.env.local and backend/backend/.env.
+- Use templates (for example front/.env.example) for variable names only.
+- If a secret is exposed, rotate it immediately and rewrite history.
+
+### Pre-commit Secret Scanning
+
+This repository uses Husky with a pre-commit scanner:
+
+- Hook file: .husky/pre-commit
+- Scanner script: scripts/secret-scan.js
+
+To verify manually before committing:
+
+```bash
+npm run secret-scan
+```
+
+### GitHub Push Protection
+
+Enable Push Protection in repository settings:
+
+1. Open GitHub repository Settings.
+2. Go to Security > Code security and analysis.
+3. Enable Secret scanning.
+4. Enable Push protection.
+
+This blocks pushes that contain known secret patterns.
+
 ## Contribution
 
 1. Fork the repository
