@@ -1,137 +1,198 @@
 # ZenFit
 
-ZenFit is a full-stack fitness and wellness tracker with a React frontend and a Node.js/Express backend.
+<p align="center">
+  <img src="./ZenFit.png" alt="ZenFit Banner" width="100%" />
+</p>
 
-This repository contains:
-- A frontend app for authentication, dashboards, workout and wellness tracking.
-- A backend API with JWT authentication and MongoDB persistence.
+<p align="center">
+  <strong>Track workouts, nutrition, and wellness in one place.</strong>
+</p>
 
-## Project Structure
+<p align="center">
+  <img alt="Frontend" src="https://img.shields.io/badge/Frontend-React%20%2B%20TypeScript-61dafb?style=for-the-badge&logo=react&logoColor=white">
+  <img alt="Backend" src="https://img.shields.io/badge/Backend-Node.js%20%2B%20Express-339933?style=for-the-badge&logo=node.js&logoColor=white">
+  <img alt="Database" src="https://img.shields.io/badge/Database-MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white">
+  <img alt="Auth" src="https://img.shields.io/badge/Auth-JWT-f59e0b?style=for-the-badge">
+</p>
 
-```
-webpage/
-  backend/
-    backend/
-      config/
-      controllers/
-      middleware/
-      models/
-      routes/
-      server.js
-      package.json
-  front/
-    src/
-      components/
-      contexts/
-      pages/
-      services/
-    public/
-    package.json
-  start.bat
-```
+ZenFit is a full-stack fitness platform designed to help users build consistent healthy habits.
+It combines workout logging, nutrition monitoring, wellness tracking, and progress analytics in a single web app.
+
+## Why ZenFit
+
+- Unified health dashboard for workouts, meals, and wellness metrics
+- JWT-based authentication with protected app routes
+- Modular backend architecture for easy feature expansion
+- Frontend built with reusable service and component patterns
+- Ready for local development with separate frontend and backend processes
+
+## Feature Highlights
+
+### Core User Flow
+
+- Register and login securely
+- Access authenticated pages only after login
+- Manage user profile and personal details
+
+### Fitness and Activity
+
+- Track workouts
+- Visualize workout activity with calendar views
+- Set and monitor goals
+
+### Nutrition and Wellness
+
+- Track nutrition records
+- Track wellness entries
+- View health trends through analytics pages
+
+### Social and Progress
+
+- Friends and leaderboard modules
+- Stats endpoints for summary insights
 
 ## Tech Stack
 
-- Frontend: React, TypeScript, Material UI, Axios, Recharts
-- Backend: Node.js, Express, MongoDB (Mongoose), JWT, bcrypt, CORS
+### Frontend
 
-## Features
+- React 18 + TypeScript
+- Material UI + Emotion
+- Axios for API requests
+- Recharts for data visualization
 
-- User registration and login
-- Protected frontend routes
-- Workout tracking and workout calendar
-- Nutrition tracking
-- Wellness tracking
-- Profile management
-- Analytics pages and dashboards
+### Backend
 
-## API Modules
+- Node.js + Express
+- MongoDB + Mongoose
+- JWT + bcryptjs for auth and password security
+- CORS + dotenv middleware stack
 
-The backend exposes routes under `/api`:
+## Repository Layout
 
-- `/api/auth`
-- `/api/workouts`
-- `/api/stats`
-- `/api/goals`
-- `/api/friends`
-- `/api/leaderboard`
-- `/api/nutrition`
-- `/api/wellness`
-- `/api/users`
-
-## Prerequisites
-
-- Node.js 18+
-- npm 9+
-- MongoDB (local or hosted)
-
-## Environment Variables
-
-Create `webpage/backend/backend/.env` with:
-
+```text
+webpage/
+├─ front/                    # React + TypeScript client
+│  ├─ src/
+│  │  ├─ components/
+│  │  ├─ contexts/
+│  │  ├─ pages/
+│  │  └─ services/
+│  └─ package.json
+├─ backend/
+│  └─ backend/               # Express API server
+│     ├─ config/
+│     ├─ controllers/
+│     ├─ middleware/
+│     ├─ models/
+│     ├─ routes/
+│     ├─ server.js
+│     └─ package.json
+├─ ZenFit.png
+└─ start.bat
 ```
-MONGO_URI=<your_mongodb_connection_string>
-JWT_SECRET=<your_jwt_secret>
+
+## API Surface
+
+All backend routes are mounted under /api.
+
+| Module | Base Route | Purpose |
+|---|---|---|
+| Auth | /api/auth | Register, login, profile auth operations |
+| Workouts | /api/workouts | Workout create/read/update flows |
+| Stats | /api/stats | Aggregated dashboard metrics |
+| Goals | /api/goals | User goal management |
+| Friends | /api/friends | Social/friend relationships |
+| Leaderboard | /api/leaderboard | Ranking and progress comparisons |
+| Nutrition | /api/nutrition | Nutrition logging and history |
+| Wellness | /api/wellness | Wellness tracking entries |
+| Users | /api/users | User-level data operations |
+
+## Local Development Setup
+
+### 1. Prerequisites
+
+- Node.js 18 or later
+- npm 9 or later
+- MongoDB instance (local or cloud)
+
+### 2. Configure Environment Variables
+
+Create file: backend/backend/.env
+
+```env
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secure_jwt_secret
 PORT=5000
 ```
 
-## Installation
+### 3. Install Dependencies
 
-From `webpage/`:
-
-1. Install frontend dependencies:
-
-   ```bash
-   cd front
-   npm install
-   ```
-
-2. Install backend dependencies:
-
-   ```bash
-   cd ../backend/backend
-   npm install
-   ```
-
-## Running Locally
-
-Start backend:
+Frontend:
 
 ```bash
-cd webpage/backend/backend
+cd front
+npm install
+```
+
+Backend:
+
+```bash
+cd ../backend/backend
+npm install
+```
+
+### 4. Run the Application
+
+Start backend server:
+
+```bash
+cd backend/backend
 npm run dev
 ```
 
-Start frontend:
+Start frontend app (separate terminal):
 
 ```bash
-cd webpage/front
+cd front
 npm start
 ```
 
-Default local URLs:
+### 5. Open in Browser
 
-- Frontend: `http://localhost:3000`
-- Backend: `http://localhost:5000`
+- Frontend: http://localhost:3000
+- Backend health route: http://localhost:5000
 
-Note: The frontend API client currently points to `http://localhost:5000/api`.
+Current frontend API base URL is configured as:
 
-## Scripts
+- http://localhost:5000/api
 
-Frontend (`webpage/front`):
-- `npm start`
-- `npm run build`
-- `npm test`
+## Available Scripts
 
-Backend (`webpage/backend/backend`):
-- `npm start`
-- `npm run dev`
+### Frontend (front)
 
-## Notes
+- npm start
+- npm run build
+- npm test
 
-- Do not commit `.env` files.
-- The project contains backup and experimental files under frontend pages; production code should prefer the main page files.
+### Backend (backend/backend)
+
+- npm start
+- npm run dev
+
+## Project Notes
+
+- Keep .env files out of version control.
+- Repository currently includes some backup/experimental page variants in front/src/pages.
+- Production cleanup can remove unused backup files once final pages are confirmed.
+
+## Contribution
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Open a pull request
 
 ## License
 
-No license has been defined for this project yet.
+No explicit license file is present yet.
+Add a LICENSE file before public distribution if needed.
