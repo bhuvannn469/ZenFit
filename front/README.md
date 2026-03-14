@@ -42,6 +42,21 @@ Axios base URL is configured in src/services/api.ts:
 
 Make sure backend is running before using authenticated features.
 
+## Environment Variables
+
+Create front/.env.local from front/.env.example and fill your values.
+
+Required values include:
+
+- REACT_APP_GEMINI_API_KEY
+- REACT_APP_FIREBASE_API_KEY
+- REACT_APP_FIREBASE_AUTH_DOMAIN
+- REACT_APP_FIREBASE_PROJECT_ID
+- REACT_APP_FIREBASE_STORAGE_BUCKET
+- REACT_APP_FIREBASE_MESSAGING_SENDER_ID
+- REACT_APP_FIREBASE_APP_ID
+- REACT_APP_FIREBASE_MEASUREMENT_ID
+
 ## Scripts
 
 In the front directory:

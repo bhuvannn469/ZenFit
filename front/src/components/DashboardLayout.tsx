@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, Avatar, List, ListItem, ListItemIcon, InputBase } from '@mui/material';
+import { Box, Typography, Avatar, InputBase } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
@@ -30,17 +30,21 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
   const currentUser = authService.getCurrentUser();
   const userInitial = currentUser?.name ? currentUser.name.charAt(0).toUpperCase() : 'U';
 
-  // Gemini API key (replace with your real key)
-  const GEMINI_API_KEY = '***ROTATED_AND_REMOVED***';
+  const geminiApiKey = process.env.REACT_APP_GEMINI_API_KEY;
 
   // Send message to Gemini API
   const handleSend = async () => {
     if (!input.trim()) return;
+    if (!geminiApiKey) {
+      setChat(prev => [...prev, { sender: 'ai', text: 'AI assistant is not configured. Add REACT_APP_GEMINI_API_KEY in your frontend env file.' }]);
+      return;
+    }
+
     const userMsg = input;
     setChat(prev => [...prev, { sender: 'user', text: userMsg }]);
     setInput('');
     try {
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`,
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${geminiApiKey}`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -53,6 +57,7 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
       const aiReply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response from AI.';
       setChat(prev => [...prev, { sender: 'ai', text: aiReply }]);
     } catch (err) {
+      console.error('Gemini request failed:', err);
       setChat(prev => [...prev, { sender: 'ai', text: 'Sorry, AI is unavailable.' }]);
     }
   };
